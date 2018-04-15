@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +21,9 @@ public class HomeScreen extends Activity {
 
     private Task[] tasks;
     private int tasksSize;
-    private static final int MAX_TASKS = 10;
+    private static final int MAX_TASKS = 2;
+    private ListView taskListView;
+    private ArrayAdapter<Task> taskAdapter;
 
     public void doShowCreateTaskDialog(View view) throws ToManyTasksException{
         if(tasksSize < MAX_TASKS) {
@@ -32,6 +37,10 @@ public class HomeScreen extends Activity {
 
         tasks[tasksSize] = new Task(taskTitle, taskBody);
         tasksSize++;
+        taskAdapter.notifyDataSetChanged();
+
+
+
     }
 
     public void showCannotCreateNewTaskMessage(){
@@ -61,7 +70,14 @@ public class HomeScreen extends Activity {
         });
 
         this.tasks = new Task[MAX_TASKS];
-        this.tasksSize = 0;
+
+
+        taskListView = findViewById(R.id.task_list);
+        this.taskAdapter = new ArrayAdapter<Task>(this,android.R.layout.simple_list_item_1,tasks);
+        taskListView.setAdapter(taskAdapter);
+        taskAdapter.notifyDataSetChanged();
+
+
 
     }
 

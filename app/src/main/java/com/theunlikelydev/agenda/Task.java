@@ -12,4 +12,8 @@ public class Task {
         this.title = title;
         this.description = description;
     }
+
+    public String toString(){
+        return title;
+    }
 }
