@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
@@ -24,7 +25,7 @@ public class HomeScreen extends Activity {
     private List<Task> tasks;
     private static final int MAX_TASKS = 20;
     private ListView taskListView;
-    private ArrayAdapter<Task> taskAdapter;
+    private TaskAdapter taskAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +57,9 @@ public class HomeScreen extends Activity {
         taskListView.setDividerHeight(10);
 
 
-        this.taskAdapter = new ArrayAdapter<Task>(this,R.layout.task_list_item,tasks);
+        this.taskAdapter = new TaskAdapter(tasks,this);
         taskListView.setAdapter(taskAdapter);
-        taskAdapter.notifyDataSetChanged();
+       // taskAdapter.notifyDataSetChanged();
 
 
 
@@ -66,7 +67,7 @@ public class HomeScreen extends Activity {
 
 
     public void doShowCreateTaskDialog(View view) throws ToManyTasksException{
-        if(tasks.size() < MAX_TASKS) {
+        if(taskAdapter.getCount() < MAX_TASKS) {
             new CreateTaskDialog().show(getFragmentManager(), "create_task");
         }else{
             throw  new ToManyTasksException();
@@ -75,7 +76,7 @@ public class HomeScreen extends Activity {
 
     public void addTask(String taskTitle,String taskBody) {
 
-        tasks.add(new Task(taskTitle,taskBody));
+        taskAdapter.add(new Task(taskTitle,taskBody));
         taskAdapter.notifyDataSetChanged();
 
     }
