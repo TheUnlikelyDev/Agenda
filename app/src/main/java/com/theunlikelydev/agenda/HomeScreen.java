@@ -21,7 +21,7 @@ public class HomeScreen extends Activity {
 
     private Task[] tasks;
     private int tasksSize;
-    private static final int MAX_TASKS = 2;
+    private static final int MAX_TASKS = 1;
     private ListView taskListView;
     private ArrayAdapter<Task> taskAdapter;
 
@@ -73,7 +73,11 @@ public class HomeScreen extends Activity {
 
 
         taskListView = findViewById(R.id.task_list);
-        this.taskAdapter = new ArrayAdapter<Task>(this,android.R.layout.simple_list_item_1,tasks);
+        taskListView.setDividerHeight(0);
+        taskListView.setDividerHeight(10);
+
+
+        this.taskAdapter = new ArrayAdapter<Task>(this,R.layout.task_list_item,tasks);
         taskListView.setAdapter(taskAdapter);
         taskAdapter.notifyDataSetChanged();
 

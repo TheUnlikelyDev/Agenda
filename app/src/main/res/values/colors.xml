@@ -9,4 +9,7 @@
     <color name="colorAccentLight">#e9e7e6</color>
 
     <color name="colorProcrastinationRed">#FF0000</color>
+
+    <color name="taskItemBackground">#FFFFFF</color>
+    <color name="taskItemText">#000000</color>
 </resources>
