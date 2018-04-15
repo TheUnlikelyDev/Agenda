@@ -27,6 +27,12 @@
         android:background="@color/colorAccentLight"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal">
+        <Button
+            android:onClick="doShowCreateTaskDialog"
+            android:id="@+id/create_task_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </LinearLayout>

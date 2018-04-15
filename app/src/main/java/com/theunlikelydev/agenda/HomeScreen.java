@@ -3,6 +3,7 @@ package com.theunlikelydev.agenda;
 import android.app.Activity;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -12,6 +13,12 @@ import java.util.Date;
 public class HomeScreen extends Activity {
 
     private TextView agendaTitle;
+
+    public void doShowCreateTaskDialog(View view){
+        new CreateTaskDialog().show(getFragmentManager(),"create_task");
+    }
+
+    public void addTask(String taskTitle,String taskBody){}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,4 +46,7 @@ public class HomeScreen extends Activity {
         return dateFormat.format(date);
 
     }
+
+
+
 }
