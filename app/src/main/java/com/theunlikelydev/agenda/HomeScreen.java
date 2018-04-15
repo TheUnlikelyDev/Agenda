@@ -13,39 +13,18 @@ import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class HomeScreen extends Activity {
 
     private TextView agendaTitle;
 
-    private Task[] tasks;
-    private int tasksSize;
-    private static final int MAX_TASKS = 1;
+    private List<Task> tasks;
+    private static final int MAX_TASKS = 20;
     private ListView taskListView;
     private ArrayAdapter<Task> taskAdapter;
-
-    public void doShowCreateTaskDialog(View view) throws ToManyTasksException{
-        if(tasksSize < MAX_TASKS) {
-            new CreateTaskDialog().show(getFragmentManager(), "create_task");
-        }else{
-            throw  new ToManyTasksException();
-        }
-    }
-
-    public void addTask(String taskTitle,String taskBody) {
-
-        tasks[tasksSize] = new Task(taskTitle, taskBody);
-        tasksSize++;
-        taskAdapter.notifyDataSetChanged();
-
-
-
-    }
-
-    public void showCannotCreateNewTaskMessage(){
-        Toast.makeText(this,R.string.to_many_tasks_message,Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +48,7 @@ public class HomeScreen extends Activity {
             }
         });
 
-        this.tasks = new Task[MAX_TASKS];
+        this.tasks = new ArrayList<Task>();
 
 
         taskListView = findViewById(R.id.task_list);
@@ -83,6 +62,26 @@ public class HomeScreen extends Activity {
 
 
 
+    }
+
+
+    public void doShowCreateTaskDialog(View view) throws ToManyTasksException{
+        if(tasks.size() < MAX_TASKS) {
+            new CreateTaskDialog().show(getFragmentManager(), "create_task");
+        }else{
+            throw  new ToManyTasksException();
+        }
+    }
+
+    public void addTask(String taskTitle,String taskBody) {
+
+        tasks.add(new Task(taskTitle,taskBody));
+        taskAdapter.notifyDataSetChanged();
+
+    }
+
+    public void showCannotCreateNewTaskMessage(){
+        Toast.makeText(this,R.string.to_many_tasks_message,Toast.LENGTH_SHORT).show();
     }
 
     private void setAgendaTitle(){

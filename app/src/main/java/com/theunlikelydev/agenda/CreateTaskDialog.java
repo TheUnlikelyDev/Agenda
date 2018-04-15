@@ -25,7 +25,6 @@ public class CreateTaskDialog extends android.app.DialogFragment implements Dial
 
         dialogView = getActivity().getLayoutInflater().inflate(R.layout.fragment_create_task_dialog,null);
 
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         return(builder.setTitle(R.string.create_task_title)
@@ -43,9 +42,7 @@ public class CreateTaskDialog extends android.app.DialogFragment implements Dial
         EditText value = dialogView.findViewById(R.id.task_body_edt);
 
         HomeScreen homeScreen =(HomeScreen) getActivity();
-
-            homeScreen.addTask(title.getText().toString(), value.getText().toString());
-
+        homeScreen.addTask(title.getText().toString(), value.getText().toString());
 
     }
 }
