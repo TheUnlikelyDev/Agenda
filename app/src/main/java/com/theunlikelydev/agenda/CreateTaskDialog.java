@@ -41,9 +41,11 @@ public class CreateTaskDialog extends android.app.DialogFragment implements Dial
 
         EditText title = dialogView.findViewById(R.id.task_title_edt);
         EditText value = dialogView.findViewById(R.id.task_body_edt);
-        
+
         HomeScreen homeScreen =(HomeScreen) getActivity();
-        homeScreen.addTask(title.getText().toString(),  value.getText().toString());
+
+            homeScreen.addTask(title.getText().toString(), value.getText().toString());
+
 
     }
 }
