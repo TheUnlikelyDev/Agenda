@@ -9,4 +9,6 @@
 
     <string name="to_many_tasks_message">You have too many tasks already</string>
 
+    <string name="view_dialog_text">Task</string>
+
 </resources>

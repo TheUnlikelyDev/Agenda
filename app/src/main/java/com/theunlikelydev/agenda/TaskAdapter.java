@@ -1,26 +1,27 @@
 package com.theunlikelydev.agenda;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.net.ContentHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by wsmfo_000 on 16/04/2018.
- */
-///
+
 public class TaskAdapter extends BaseAdapter implements ListAdapter {
 
     private List<Task> list = new ArrayList<Task>();
     private Context context;
-    private String dud;
+
 
     public TaskAdapter(List<Task> list, Context context){
         this.context= context;
@@ -44,7 +45,7 @@ public class TaskAdapter extends BaseAdapter implements ListAdapter {
     }
 
     @Override
-    public long getItemId(int i) {
+    public long getItemId(int id) {
         return 0;
     }
 
@@ -55,6 +56,23 @@ public class TaskAdapter extends BaseAdapter implements ListAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.task_list_item, null);
         }
+
+        TextView title = view.findViewById(R.id.task_cell_title);
+        title.setText(list.get(position).getTitle());
+        title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                HomeScreen homeScreen =(HomeScreen) context;
+                TaskViewDialog viewDialog = new TaskViewDialog();
+                Bundle args = new Bundle();
+                String[] info = new String[]{list.get(position).getTitle(),list.get(position).getDescription()};
+                args.putStringArray("task_info",info);
+                viewDialog.setArguments(args);
+                viewDialog.show(homeScreen.getFragmentManager(), "view task");
+
+            }
+        });
 
         Button taskCompleted = view.findViewById(R.id.task_complete_button);
         taskCompleted.setOnClickListener(new View.OnClickListener() {
