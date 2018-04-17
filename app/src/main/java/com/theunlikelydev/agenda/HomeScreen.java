@@ -46,12 +46,21 @@ public class HomeScreen extends Activity {
 
 
         filesDir = getFilesDir().toString();
-        Log.d(TAG, "onCreate: " + filesDir);
-
-
 
         this.agendaTitle = findViewById(R.id.daily_agenda_title);
 
+        buildCreateTaskButton();
+
+
+        ArrayList<Task> list = loadTaskListArray();
+        buildTaskListView(list);
+        doOverflowCheck();
+        this.agendaTitle.setText(getDateTime());
+
+
+    }
+
+    private void buildCreateTaskButton(){
 
         Button createTask = findViewById(R.id.create_task_button);
         createTask.setOnClickListener(new View.OnClickListener() {
@@ -67,39 +76,31 @@ public class HomeScreen extends Activity {
             }
         });
 
-        ArrayList<Task> list = new ArrayList<Task>();
+    }
 
+    private ArrayList<Task> loadTaskListArray(){
+        ArrayList<Task> list = null;
         try {
-           list  = new StorageManager(getFilesDir().toString()).loadTaskListFromFile();
-       }catch(IOException e){
-              e.printStackTrace();
-            Log.d(TAG, "onCreate: io");
+            list  = new StorageManager(getFilesDir().toString()).loadTaskListFromFile();
+        }catch(IOException e){
+            e.printStackTrace();
         }
         catch(ClassNotFoundException e){
-            Log.d(TAG, "onCreate: cnf");
+
         }
 
-
-
-
-        taskListView = findViewById(R.id.task_list);
-        taskListView.setDividerHeight(0);
-        taskListView.setDividerHeight(10);
-
-        if(list == null){
-            Log.d(TAG, "onCreate: null");
-        }
-
-        this.taskAdapter = new TaskAdapter(list,this);
-        taskListView.setAdapter(taskAdapter);
-       // taskAdapter.notifyDataSetChanged();
-
-        doOverflowCheck();
-        this.agendaTitle.setText(getDateTime());
-
+        return list;
 
     }
 
+    private void buildTaskListView(ArrayList<Task> list){
+        taskListView = findViewById(R.id.task_list);
+        taskListView.setDividerHeight(0);
+        taskListView.setDividerHeight(10);
+        this.taskAdapter = new TaskAdapter(list,this);
+        taskListView.setAdapter(taskAdapter);
+
+    }
 
     public void doOverflowCheck(){
         String previousDate = "";
@@ -111,8 +112,6 @@ public class HomeScreen extends Activity {
         {
             taskAdapter.overflowAllTasks();
         }
-
-
     }
 
     @Override
@@ -122,14 +121,14 @@ public class HomeScreen extends Activity {
         StorageManager manager = new StorageManager(getFilesDir().toString());
         try {
             manager.writeTaskListToFile(taskAdapter);
-            Log.d(TAG, "onDestroy: wrtten");
+
         }catch(IOException e){}
 
         try {
             manager.writeDateToFile(getDateTime().toString());
-            Log.d(TAG, "onDestroy: wrtten2");
+
         }catch(IOException e){
-            Log.d(TAG, "onDestroy: wrt task failed2");
+
         }
 
 
@@ -159,7 +158,7 @@ public class HomeScreen extends Activity {
 
     }
 
-    public void showCannotCreateNewTaskMessage(){
+    private void showCannotCreateNewTaskMessage(){
         Toast.makeText(this,R.string.to_many_tasks_message,Toast.LENGTH_SHORT).show();
     }
 
