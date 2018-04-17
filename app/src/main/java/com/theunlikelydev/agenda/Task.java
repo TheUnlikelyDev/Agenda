@@ -1,10 +1,12 @@
 package com.theunlikelydev.agenda;
 
+import java.io.Serializable;
+
 /**
  * Created by wsm18 on 15/04/2018.
  */
 
-public class Task {
+public class Task implements Serializable {
 
     private String title;
     private String description;
@@ -31,6 +33,7 @@ public class Task {
     }
 
     public String toString(){
-        return title;
+
+        return "title: " + title + ",description: " + description + ",overflow: " + overflowCount;
     }
 }

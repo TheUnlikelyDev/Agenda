@@ -19,11 +19,11 @@ import java.util.List;
 
 public class TaskAdapter extends BaseAdapter implements ListAdapter {
 
-    private List<Task> list = new ArrayList<Task>();
+    private ArrayList<Task> list = new ArrayList<Task>();
     private Context context;
 
 
-    public TaskAdapter(List<Task> list, Context context){
+    public TaskAdapter(ArrayList<Task> list, Context context){
         this.context= context;
         this.list = list;
     }
@@ -37,6 +37,10 @@ public class TaskAdapter extends BaseAdapter implements ListAdapter {
     @Override
     public int getCount() {
         return list.size();
+    }
+
+    public ArrayList<Task> getList(){
+        return this.list;
     }
 
     @Override
