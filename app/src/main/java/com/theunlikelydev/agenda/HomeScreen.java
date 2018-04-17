@@ -51,7 +51,7 @@ public class HomeScreen extends Activity {
 
 
         this.agendaTitle = findViewById(R.id.daily_agenda_title);
-        setAgendaTitle();
+
 
         Button createTask = findViewById(R.id.create_task_button);
         createTask.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +81,7 @@ public class HomeScreen extends Activity {
 
 
 
+
         taskListView = findViewById(R.id.task_list);
         taskListView.setDividerHeight(0);
         taskListView.setDividerHeight(10);
@@ -93,6 +94,23 @@ public class HomeScreen extends Activity {
         taskListView.setAdapter(taskAdapter);
        // taskAdapter.notifyDataSetChanged();
 
+        doOverflowCheck();
+        this.agendaTitle.setText(getDateTime());
+
+
+    }
+
+
+    public void doOverflowCheck(){
+        String previousDate = "";
+        try {
+           previousDate = loadPreviousDate();
+        }catch(Exception e){}
+
+        if(!previousDate.equals(getDateTime()))
+        {
+            taskAdapter.overflowAllTasks();
+        }
 
 
     }
@@ -103,12 +121,47 @@ public class HomeScreen extends Activity {
         try {
             writeTaskListToFile();
             Log.d(TAG, "onDestroy: wrtten");
+        }catch(IOException e){}
+
+        try {
+            writeDateToFile();
+            Log.d(TAG, "onDestroy: wrtten2");
         }catch(IOException e){
-            Log.d(TAG, "onDestroy: wrt task failed");
+            Log.d(TAG, "onDestroy: wrt task failed2");
         }
 
 
 
+    }
+
+
+    private void writeDateToFile() throws IOException{
+
+        FileOutputStream fileOut = new FileOutputStream(filesDir +"/date");
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        out.writeObject(getDateTime());
+        out.close();
+        fileOut.close();
+
+
+    }
+
+    private String loadPreviousDate() throws IOException,ClassNotFoundException{
+
+        File dateFile = new File(filesDir + "/date");
+
+        if(dateFile.exists()) {
+
+            FileInputStream fileIn = new FileInputStream(dateFile);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            String previousDate =(String) in.readObject();
+
+            in.close();
+            fileIn.close();
+            return previousDate;
+        }else{
+            return "";
+        }
     }
 
     private ArrayList<Task> loadTaskListFromFile() throws IOException,ClassNotFoundException{
@@ -163,14 +216,7 @@ public class HomeScreen extends Activity {
         Toast.makeText(this,R.string.to_many_tasks_message,Toast.LENGTH_SHORT).show();
     }
 
-    private void setAgendaTitle(){
 
-        String currentDate = getDateTime();
-        String text = getResources().getString(R.string.agenda_title);
-        String title =text + " " + currentDate;
-        agendaTitle.setText(title);
-
-    }
 
     private String getDateTime() {
 

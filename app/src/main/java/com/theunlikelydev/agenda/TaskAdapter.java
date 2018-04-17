@@ -62,7 +62,7 @@ public class TaskAdapter extends BaseAdapter implements ListAdapter {
         }
 
         TextView title = view.findViewById(R.id.task_cell_title);
-        title.setText(list.get(position).getTitle());
+        title.setText(list.get(position).getTitle() +":" + list.get(position).getOverflowCount());
         title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,6 +90,15 @@ public class TaskAdapter extends BaseAdapter implements ListAdapter {
 
         return view;
 
+    }
+
+    public void overflowAllTasks(){
+
+
+        for(Task task : list)
+        {
+            task.incrementOverflow();
+        }
     }
 
     public void removeTask(int position){
