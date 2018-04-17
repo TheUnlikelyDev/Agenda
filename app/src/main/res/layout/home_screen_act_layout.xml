@@ -30,7 +30,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
         <Button
-
+            android:text="Add Task"
             android:id="@+id/create_task_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

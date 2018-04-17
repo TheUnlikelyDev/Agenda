@@ -62,7 +62,7 @@ public class TaskAdapter extends BaseAdapter implements ListAdapter {
         }
 
         TextView title = view.findViewById(R.id.task_cell_title);
-        title.setText(list.get(position).getTitle() +":" + list.get(position).getOverflowCount());
+        title.setText(list.get(position).getTitle());
         title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +70,9 @@ public class TaskAdapter extends BaseAdapter implements ListAdapter {
                 HomeScreen homeScreen =(HomeScreen) context;
                 TaskViewDialog viewDialog = new TaskViewDialog();
                 Bundle args = new Bundle();
-                String[] info = new String[]{list.get(position).getTitle(),list.get(position).getDescription()};
+                String[] info = new String[]{list.get(position).getTitle(),
+                        list.get(position).getDescription(),
+                Integer.toString(list.get(position).getOverflowCount())};
                 args.putStringArray("task_info",info);
                 viewDialog.setArguments(args);
                 viewDialog.show(homeScreen.getFragmentManager(), "view task");

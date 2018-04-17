@@ -19,16 +19,17 @@ public class TaskViewDialog extends android.app.DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        if(getArguments() == null){
-            Log.d("s", "onCreateDialog: ");
-        }
+
         this.taskInfo = getArguments().getStringArray("task_info");
         view = getActivity().getLayoutInflater().inflate(R.layout.fragment_task_view_dialog,null);
 
         TextView title = view.findViewById(R.id.title_tv);
         TextView description = view.findViewById(R.id.description_tv);
+        TextView overflow = view.findViewById(R.id.overflow_tv);
         title.setText(taskInfo[0]);
         description.setText(taskInfo[1]);
+        overflow.setText(taskInfo[2]);
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 

@@ -9,6 +9,12 @@
         android:id="@+id/title_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="25sp"
+        android:layout_weight="1"
+        android:id="@+id/overflow_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:textSize="20sp"

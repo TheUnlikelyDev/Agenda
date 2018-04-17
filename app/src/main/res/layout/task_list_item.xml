@@ -6,7 +6,7 @@
 
 <TextView
     android:id="@+id/task_cell_title"
-    android:layout_weight="0.15"
+    android:layout_weight="0.20"
     android:background="@color/colorAccentLight"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -18,7 +18,7 @@
 
 </TextView>
     <Button
-
+         android:text="done"
         android:id="@+id/task_complete_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
