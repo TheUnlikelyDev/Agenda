@@ -70,7 +70,7 @@ public class HomeScreen extends Activity {
         ArrayList<Task> list = new ArrayList<Task>();
 
         try {
-           list  = loadTaskListFromFile();
+           list  = new StorageManager(getFilesDir().toString()).loadTaskListFromFile();
        }catch(IOException e){
               e.printStackTrace();
             Log.d(TAG, "onCreate: io");
@@ -104,7 +104,7 @@ public class HomeScreen extends Activity {
     public void doOverflowCheck(){
         String previousDate = "";
         try {
-           previousDate = loadPreviousDate();
+           previousDate = new StorageManager(getFilesDir().toString()).loadPreviousDate();
         }catch(Exception e){}
 
         if(!previousDate.equals(getDateTime()))
@@ -138,45 +138,9 @@ public class HomeScreen extends Activity {
 
 
 
-    private String loadPreviousDate() throws IOException,ClassNotFoundException{
-
-        File dateFile = new File(filesDir + "/date");
-
-        if(dateFile.exists()) {
-
-            FileInputStream fileIn = new FileInputStream(dateFile);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            String previousDate =(String) in.readObject();
-
-            in.close();
-            fileIn.close();
-            return previousDate;
-        }else{
-            return "";
-        }
-    }
-
-    private ArrayList<Task> loadTaskListFromFile() throws IOException,ClassNotFoundException{
-        File listFile = new File(filesDir + "/tasks_list");
-
-        if(listFile.exists()){
-            Log.d(TAG, "loadTaskListFromFile: in listFIleexists");
-            FileInputStream fileIn = new FileInputStream(listFile);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            ArrayList<Task> list = (ArrayList<Task>) in.readObject();
-            if(list == null) {
-                Log.d(TAG, "loadTaskListFromFile: null");
-            }
-            in.close();
-            fileIn.close();
-
-            return list;
-        }else{
-            return new ArrayList<Task>();
-        }
 
 
-    }
+
 
 
 
