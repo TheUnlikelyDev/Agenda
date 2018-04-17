@@ -118,13 +118,15 @@ public class HomeScreen extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        StorageManager manager = new StorageManager(getFilesDir().toString());
         try {
-            writeTaskListToFile();
+            manager.writeTaskListToFile(taskAdapter);
             Log.d(TAG, "onDestroy: wrtten");
         }catch(IOException e){}
 
         try {
-            writeDateToFile();
+            manager.writeDateToFile(getDateTime().toString());
             Log.d(TAG, "onDestroy: wrtten2");
         }catch(IOException e){
             Log.d(TAG, "onDestroy: wrt task failed2");
@@ -135,16 +137,6 @@ public class HomeScreen extends Activity {
     }
 
 
-    private void writeDateToFile() throws IOException{
-
-        FileOutputStream fileOut = new FileOutputStream(filesDir +"/date");
-        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-        out.writeObject(getDateTime());
-        out.close();
-        fileOut.close();
-
-
-    }
 
     private String loadPreviousDate() throws IOException,ClassNotFoundException{
 
@@ -186,16 +178,7 @@ public class HomeScreen extends Activity {
 
     }
 
-    private void writeTaskListToFile() throws IOException{
 
-        FileOutputStream fileOut = new FileOutputStream(filesDir +"/tasks_list");
-        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-        out.writeObject(taskAdapter.getList());
-        out.close();
-        fileOut.close();
-        Log.d(TAG, "writeTaskListToFile: end");
-
-    }
 
     public void doShowCreateTaskDialog(View view) throws ToManyTasksException{
         if(taskAdapter.getCount() < MAX_TASKS) {
