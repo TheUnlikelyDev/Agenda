@@ -63,6 +63,7 @@ public class TaskAdapter extends BaseAdapter implements ListAdapter {
 
         TextView title = view.findViewById(R.id.task_cell_title);
         title.setText(list.get(position).getTitle());
+title.setBackgroundColor(list.get(position).getOverflowColorAsInt());
         title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

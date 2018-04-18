@@ -95,8 +95,6 @@ public class HomeScreen extends Activity {
 
     private void buildTaskListView(ArrayList<Task> list){
         taskListView = findViewById(R.id.task_list);
-        taskListView.setDividerHeight(0);
-        taskListView.setDividerHeight(10);
         this.taskAdapter = new TaskAdapter(list,this);
         taskListView.setAdapter(taskAdapter);
 
