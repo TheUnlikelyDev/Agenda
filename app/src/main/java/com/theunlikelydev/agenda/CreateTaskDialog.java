@@ -39,10 +39,32 @@ public class CreateTaskDialog extends android.app.DialogFragment implements Dial
     public void onClick(DialogInterface dialogInterface, int i) {
 
         EditText title = dialogView.findViewById(R.id.task_title_edt);
-        EditText value = dialogView.findViewById(R.id.task_body_edt);
+        EditText description = dialogView.findViewById(R.id.task_body_edt);
+
+        String parsedTitle = parseTitle(title.getText().toString());
+        String parsedDescription =parseDescription(description.getText().toString());
 
         HomeScreen homeScreen =(HomeScreen) getActivity();
-        homeScreen.addTask(title.getText().toString(), value.getText().toString());
+        homeScreen.addTask(parsedTitle,parsedDescription);
+    }
+
+    private String parseTitle(String title){
+
+        return firstLetterUpcase(title);
+
+    }
+    private String parseDescription(String description){
+
+        return firstLetterUpcase(description);
+
+    }
+
+    private String firstLetterUpcase(String convert){
+        char[] arr = convert.toCharArray();
+        char cap = Character.toUpperCase(arr[0]);
+
+        StringBuilder newString = new StringBuilder(convert).replace(0,1,Character.toString(cap));
+        return newString.toString();
 
     }
 }

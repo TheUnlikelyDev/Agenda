@@ -60,6 +60,6 @@ public class Task implements Serializable {
         }
 
         return  color;
-        
+
     }
 }
