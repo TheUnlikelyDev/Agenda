@@ -61,6 +61,9 @@ public class CreateTaskDialog extends android.app.DialogFragment implements Dial
 
     private String firstLetterUpcase(String convert){
         char[] arr = convert.toCharArray();
+        if(convert.length() <=0){
+            return "";
+        }
         char cap = Character.toUpperCase(arr[0]);
 
         StringBuilder newString = new StringBuilder(convert).replace(0,1,Character.toString(cap));

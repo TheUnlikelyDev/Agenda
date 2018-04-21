@@ -1,9 +1,13 @@
 package com.theunlikelydev.agenda;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,7 +34,7 @@ public class HomeScreen extends Activity {
 
     String TAG = this.getClass().getSimpleName();
 
-    private TextView agendaTitle;
+
 
 
     private static final int MAX_TASKS = 20;
@@ -44,10 +48,14 @@ public class HomeScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen_act_layout);
 
+        ActionBar bar = getActionBar();
+        String agendaTitleText = getResources().getString(R.string.agenda_title);
+        bar.setTitle(agendaTitleText + " " +getDateTime());
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#004488")));
 
         filesDir = getFilesDir().toString();
 
-        this.agendaTitle = findViewById(R.id.daily_agenda_title);
+
 
         buildCreateTaskButton();
 
@@ -55,7 +63,7 @@ public class HomeScreen extends Activity {
         ArrayList<Task> list = loadTaskListArray();
         buildTaskListView(list);
         doOverflowCheck();
-        this.agendaTitle.setText(getDateTime());
+
 
 
     }
@@ -134,10 +142,12 @@ public class HomeScreen extends Activity {
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action,menu);
 
-
-
-
+        return super.onCreateOptionsMenu(menu);
+    }
 
 
 

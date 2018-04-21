@@ -4,20 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
   >
-    <TextView
 
-        android:id="@+id/daily_agenda_title"
-        android:background="@color/colorPrimaryDark"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="5"
-        android:textSize="30sp"
-        android:textColor="@color/colorAccentLight"
-        android:gravity="center"
-        android:text="@string/default_text"
-       >
-
-    </TextView>
     <ListView
         android:id="@+id/task_list"
         android:background="@android:color/white"
