@@ -3,6 +3,7 @@ package com.theunlikelydev.agenda;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,10 +62,14 @@ public class TaskAdapter extends BaseAdapter implements ListAdapter {
             view = inflater.inflate(R.layout.task_list_item, null);
         }
 
+        CardView card = view.findViewById(R.id.card_view);
         TextView title = view.findViewById(R.id.task_cell_title);
         title.setText(list.get(position).getTitle());
-title.setBackgroundColor(list.get(position).getOverflowColorAsInt());
-        title.setOnClickListener(new View.OnClickListener() {
+
+        int procrastColor = list.get(position).getOverflowColorAsInt();
+        title.setBackgroundColor(procrastColor);
+        card.setCardBackgroundColor(procrastColor);
+        card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
