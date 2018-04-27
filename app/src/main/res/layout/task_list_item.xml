@@ -4,16 +4,28 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardBackgroundColor="@android:color/white"
+        >
+
 <TextView
     android:id="@+id/task_cell_title"
     android:layout_weight="0.20"
-    android:background="@color/colorAccentLight"
+    android:layout_gravity="center"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:textColor="@color/taskItemText"
-    android:textSize="30sp"
+    android:textSize="15sp"
     />
+    </android.support.v7.widget.CardView>
+
 
 
 
