@@ -12,8 +12,8 @@ The increment feature is to help a user notice what tasks they are procrastinati
 and therefore reinforce the importance of completing them.
 
 Why?
-I constantly found myself writing down the things to do each day on paper, and then
-check of tasks when I completed them.However there were tasks I subconciously avoided.The
+I constantly found myself writing down the things to do each day on paper, and then would
+check of tasks when I completed them.However, there were tasks I subconciously avoided.The
 idea is that by having some sort of accountability/notification system then I can intelligently
 adapt and combat certain unhelpful behaviours and remain productive.
 
