@@ -34,13 +34,9 @@ public class HomeScreen extends Activity {
 
     String TAG = this.getClass().getSimpleName();
 
-
-
-
     private static final int MAX_TASKS = 20;
     private ListView taskListView;
     private TaskAdapter taskAdapter;
-
     private String filesDir;
 
     @Override
@@ -48,24 +44,48 @@ public class HomeScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen_act_layout);
 
-        ActionBar bar = getActionBar();
-        String agendaTitleText = getResources().getString(R.string.agenda_title);
-        bar.setTitle(agendaTitleText + " " +getDateTime());
-        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#004488")));
+        createActionBar();
 
         filesDir = getFilesDir().toString();
 
-
-
         buildCreateTaskButton();
-
 
         ArrayList<Task> list = loadTaskListArray();
         buildTaskListView(list);
         doOverflowCheck();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        StorageManager manager = new StorageManager(getFilesDir().toString());
+        try {
+            manager.writeTaskListToFile(taskAdapter);
+        }catch(IOException e){}
+
+        try {
+            manager.writeDateToFile(getDateTime().toString());
+        }catch(IOException e){
+
+        }
 
 
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void createActionBar(){
+
+        ActionBar bar = getActionBar();
+        String agendaTitleText = getResources().getString(R.string.agenda_title);
+        bar.setTitle(agendaTitleText + " " +getDateTime());
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#004488")));
     }
 
     private void buildCreateTaskButton(){
@@ -96,7 +116,6 @@ public class HomeScreen extends Activity {
         catch(ClassNotFoundException e){
 
         }
-
         return list;
 
     }
@@ -105,7 +124,6 @@ public class HomeScreen extends Activity {
         taskListView = findViewById(R.id.task_list);
         this.taskAdapter = new TaskAdapter(list,this);
         taskListView.setAdapter(taskAdapter);
-
     }
 
     public void doOverflowCheck(){
@@ -119,37 +137,6 @@ public class HomeScreen extends Activity {
             taskAdapter.overflowAllTasks();
         }
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        StorageManager manager = new StorageManager(getFilesDir().toString());
-        try {
-            manager.writeTaskListToFile(taskAdapter);
-
-        }catch(IOException e){}
-
-        try {
-            manager.writeDateToFile(getDateTime().toString());
-
-        }catch(IOException e){
-
-        }
-
-
-
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.action,menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-
 
     public void doShowCreateTaskDialog(View view) throws ToManyTasksException{
         if(taskAdapter.getCount() < MAX_TASKS) {
@@ -169,8 +156,6 @@ public class HomeScreen extends Activity {
     private void showCannotCreateNewTaskMessage(){
         Toast.makeText(this,R.string.to_many_tasks_message,Toast.LENGTH_SHORT).show();
     }
-
-
 
     private String getDateTime() {
 
