@@ -1,0 +1,7 @@
+1. Tidy up visuals
+	a. Tasks
+	b. Tasks GUI
+	c. Create Task dialog
+3. Intro screen animation
+2. Fix saving bug
+
