@@ -17,28 +17,26 @@
 
         >
 
-<TextView
-    android:id="@+id/task_cell_title"
-    android:layout_weight="0.20"
-
-    android:layout_gravity="center"
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textColor="@color/taskItemText"
-    android:textSize="25sp"
-    />
+        <TextView
+            android:id="@+id/task_cell_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.20"
+            android:fontFamily="@font/carter_one"
+            android:orientation="vertical"
+            android:textColor="@color/taskItemText"
+            android:textSize="25sp" />
     </android.support.v7.widget.CardView>
 
 
-
-
     <Button
-         android:text="done"
-        android:background="@color/colorAccent"
         android:id="@+id/task_complete_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:background="@color/colorAccent"
+        android:fontFamily="@font/carter_one"
+        android:text="done" />
 
 </LinearLayout>
