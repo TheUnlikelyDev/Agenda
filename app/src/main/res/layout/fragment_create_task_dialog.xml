@@ -3,19 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.theunlikelydev.agenda.CreateTaskDialog"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:padding="4dp"
+
+   >
+    <TextView
+        android:id="@+id/createTaskTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="           Create a task"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:background="@color/colorPrimaryLight"
+        />
 
     <EditText
         android:id="@+id/task_title_edt"
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         />
     <EditText
         android:id="@+id/task_body_edt"
-        android:layout_weight="0.2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
       />
 
 </LinearLayout>
