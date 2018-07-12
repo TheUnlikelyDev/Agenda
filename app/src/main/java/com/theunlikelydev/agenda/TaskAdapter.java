@@ -94,6 +94,11 @@ public class TaskAdapter extends BaseAdapter implements ListAdapter {
         });
 
         Button taskCompleted = view.findViewById(R.id.task_complete_button);
+
+        taskCompleted.setTypeface(Typeface.createFromAsset(context.getAssets(),
+                "fonts/carterone.ttf"));
+
+
         taskCompleted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

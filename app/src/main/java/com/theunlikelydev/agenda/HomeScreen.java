@@ -13,6 +13,8 @@ import android.text.style.TypefaceSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -59,10 +61,12 @@ public class HomeScreen extends Activity {
         buildTaskListView(list);
         doOverflowCheck();
 
-        Button taskCreateButton = findViewById(R.id.create_task_button);
-        Typeface face = Typeface.createFromAsset(getAssets(),
-                "fonts/carterone.ttf");
-        taskCreateButton.setTypeface(face);
+
+        setTaskCreateButtonFont();
+
+
+
+
 
     }
 
@@ -102,6 +106,15 @@ public class HomeScreen extends Activity {
         Typeface face = Typeface.createFromAsset(getAssets(),
                 "fonts/carterone.ttf");
         textView.setTypeface(face);
+    }
+
+    private  void setTaskCreateButtonFont(){
+
+        Button taskCreateButton = findViewById(R.id.create_task_button);
+        Typeface face = Typeface.createFromAsset(getAssets(),
+                "fonts/carterone.ttf");
+        taskCreateButton.setTypeface(face);
+
     }
 
     private void buildCreateTaskButton(){
