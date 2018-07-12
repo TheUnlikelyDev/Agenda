@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -28,11 +29,42 @@ public class CreateTaskDialog extends android.app.DialogFragment implements Dial
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+        Button posButton = dialogView.findViewById(R.id.pos_button);
+        posButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText title = dialogView.findViewById(R.id.task_title_edt);
+                EditText description = dialogView.findViewById(R.id.task_body_edt);
+
+                String parsedTitle = parseTitle(title.getText().toString());
+                String parsedDescription =parseDescription(description.getText().toString());
+
+                HomeScreen homeScreen =(HomeScreen) getActivity();
+                homeScreen.addTask(parsedTitle,parsedDescription);
+                dismiss();
+            }
+        });
+
+
+
+        Button negButton = dialogView.findViewById(R.id.neg_button);
+        negButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
+
+        TextView title = dialogView.findViewById(R.id.tv);
+
+        Typeface face = Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/carterone.ttf");
+        posButton.setTypeface(face);
+        negButton.setTypeface(face);
+        title.setTypeface(face);
 
         return(builder
                 .setView(dialogView)
-                .setPositiveButton(android.R.string.ok, this)
-                .setNegativeButton(android.R.string.cancel,null)
                 .create());
 
     }
@@ -40,14 +72,7 @@ public class CreateTaskDialog extends android.app.DialogFragment implements Dial
     @Override
     public void onClick(DialogInterface dialogInterface, int i) {
 
-        EditText title = dialogView.findViewById(R.id.task_title_edt);
-        EditText description = dialogView.findViewById(R.id.task_body_edt);
 
-        String parsedTitle = parseTitle(title.getText().toString());
-        String parsedDescription =parseDescription(description.getText().toString());
-
-        HomeScreen homeScreen =(HomeScreen) getActivity();
-        homeScreen.addTask(parsedTitle,parsedDescription);
     }
 
     private String parseTitle(String title){

@@ -9,7 +9,7 @@
 
    >
     <TextView
-        android:id="@+id/createTaskTV"
+        android:id="@+id/tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
@@ -20,14 +20,32 @@
         />
 
     <EditText
+        android:textSize="30sp"
         android:id="@+id/task_title_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
     <EditText
+        android:textSize="30sp"
         android:id="@+id/task_body_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
       />
+    <Button
+        android:text="Create"
+        android:textColor="@android:color/white"
+        android:background="@color/colorPrimaryLight"
+        android:id="@+id/pos_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"/>
+    <Button
+
+        android:text="Cancel"
+        android:textColor="@android:color/white"
+        android:id="@+id/neg_button"
+        android:background="@color/colorPrimaryLight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
