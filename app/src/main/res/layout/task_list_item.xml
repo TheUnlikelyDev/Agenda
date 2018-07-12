@@ -23,7 +23,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.20"
-            android:fontFamily="@font/carter_one"
             android:orientation="vertical"
             android:textColor="@color/taskItemText"
             android:textSize="25sp" />
@@ -36,7 +35,6 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@color/colorAccent"
-        android:fontFamily="@font/carter_one"
         android:text="done" />
 
 </LinearLayout>

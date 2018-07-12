@@ -3,9 +3,13 @@ package com.theunlikelydev.agenda;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -23,6 +27,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Type;
 import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -54,6 +59,11 @@ public class HomeScreen extends Activity {
         buildTaskListView(list);
         doOverflowCheck();
 
+        Button taskCreateButton = findViewById(R.id.create_task_button);
+        Typeface face = Typeface.createFromAsset(getAssets(),
+                "fonts/carterone.ttf");
+        taskCreateButton.setTypeface(face);
+
     }
 
     @Override
@@ -84,8 +94,14 @@ public class HomeScreen extends Activity {
 
         ActionBar bar = getActionBar();
         String agendaTitleText = getResources().getString(R.string.agenda_title);
-        bar.setTitle(agendaTitleText + " " +getDateTime());
+        bar.setTitle("   " + agendaTitleText + " " +getDateTime());
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#004488")));
+
+        int titleId = getResources().getIdentifier("action_bar_title", "id", "android");
+        TextView textView = (TextView) findViewById(titleId);
+        Typeface face = Typeface.createFromAsset(getAssets(),
+                "fonts/carterone.ttf");
+        textView.setTypeface(face);
     }
 
     private void buildCreateTaskButton(){

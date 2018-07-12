@@ -2,6 +2,7 @@ package com.theunlikelydev.agenda;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -64,6 +65,12 @@ public class TaskAdapter extends BaseAdapter implements ListAdapter {
 
         CardView card = view.findViewById(R.id.card_view);
         TextView title = view.findViewById(R.id.task_cell_title);
+
+
+        setTextFont(title);
+
+
+
         title.setText(list.get(position).getTitle());
 
         int procrastColor = list.get(position).getOverflowColorAsInt();
@@ -96,7 +103,17 @@ public class TaskAdapter extends BaseAdapter implements ListAdapter {
         });
 
 
+
+
         return view;
+
+    }
+
+    private void setTextFont(TextView title){
+
+        Typeface face = Typeface.createFromAsset(context.getAssets(),
+                "fonts/carterone.ttf");
+        title.setTypeface(face);
 
     }
 
