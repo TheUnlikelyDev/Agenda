@@ -20,12 +20,17 @@
         />
 
     <EditText
+        android:textColor="@android:color/black"
+        android:background="@color/colorAccentLight"
         android:textSize="30sp"
         android:id="@+id/task_title_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
         />
     <EditText
+        android:textColor="@android:color/black"
+        android:background="@color/colorAccentLight"
         android:textSize="30sp"
         android:id="@+id/task_body_edt"
         android:layout_width="match_parent"
